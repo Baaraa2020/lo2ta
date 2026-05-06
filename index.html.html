@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أوفر ماركت - أفضل أسعار مصر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --wa-green: #25D366;
+      --wa-dark: #128C7E;
+      --wa-light: #DCF8C6;
+      --trust-blue: #1E3A8A;
+      --accent-gold: #F59E0B;
+      --bg-soft: #F8FAFC;
+      --text-dark: #0F172A;
+      --text-muted: #64748B;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      background: var(--bg-soft);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero-bg {
+      background: linear-gradient(135deg, #0F172A 0%, #1E3A5F 45%, #0D3B2E 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(37,211,102,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(30,58,138,0.25) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* ── PULSING CTA ── */
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.55); }
+      70%  { box-shadow: 0 0 0 18px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    }
+    .btn-cta {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      animation: pulse-ring 2s infinite;
+      transition: transform .2s, filter .2s;
+    }
+    .btn-cta:hover { transform: scale(1.04); filter: brightness(1.1); }
+    .btn-cta:active { transform: scale(0.97); }
+
+    /* ── STICKY MOBILE BAR ── */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 999;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+      transform: translateY(100%);
+      transition: transform .4s ease;
+    }
+    .sticky-bar.visible { transform: translateY(0); }
+
+    /* ── STORE LOGOS PILL ── */
+    .store-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(8px);
+      border-radius: 100px;
+      padding: 8px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ── FEATURE CARD ── */
+    .feature-card {
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: 20px;
+      transition: transform .25s, box-shadow .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #25D366, #128C7E);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .3s;
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+    .feature-card:hover::before { transform: scaleX(1); }
+
+    /* ── SOCIAL PROOF ── */
+    .proof-bg {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .proof-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* ── TICKER ── */
+    @keyframes ticker {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    .ticker-wrap { overflow: hidden; background: var(--accent-gold); }
+    .ticker-inner {
+      display: inline-flex;
+      gap: 60px;
+      white-space: nowrap;
+      animation: ticker 18s linear infinite;
+      padding: 8px 0;
+    }
+
+    /* ── FLOAT BADGE ── */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+    .float-badge { animation: float 3s ease-in-out infinite; }
+    .float-badge-2 { animation: float 3.5s ease-in-out infinite 0.5s; }
+    .float-badge-3 { animation: float 2.8s ease-in-out infinite 1s; }
+
+    /* ── FADE IN ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .7s ease forwards; }
+    .delay-1 { animation-delay: .1s; opacity: 0; }
+    .delay-2 { animation-delay: .25s; opacity: 0; }
+    .delay-3 { animation-delay: .4s; opacity: 0; }
+    .delay-4 { animation-delay: .55s; opacity: 0; }
+
+    /* ── SCROLL SMOOTH ── */
+    html { scroll-behavior: smooth; }
+
+    /* ── COUNTER ── */
+    .counter-num {
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    /* ── STEP CARD ── */
+    .step-num {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 1.1rem; color: #fff;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     TICKER STRIP
+══════════════════════════════════════════ -->
+<div class="ticker-wrap">
+  <div class="ticker-inner text-sm font-bold text-white tracking-wide">
+    <span>🔥 خصم 40% على مكيفات كارير في نون</span>
+    <span>⚡ توصيل مجاني على أمازون مصر اليوم فقط</span>
+    <span>💰 كود خصم حصري على جوميا للمتابعين</span>
+    <span>📱 أجهزة سامسونج بأرخص سعر في مصر</span>
+    <span>🔥 خصم 40% على مكيفات كارير في نون</span>
+    <span>⚡ توصيل مجاني على أمازون مصر اليوم فقط</span>
+    <span>💰 كود خصم حصري على جوميا للمتابعين</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero-bg relative min-h-screen flex flex-col items-center justify-center text-center px-5 py-20">
+  <div class="hero-grid"></div>
+
+  <!-- Floating price badges -->
+  <div class="float-badge absolute top-24 right-6 md:right-16 bg-white rounded-2xl px-4 py-2 shadow-xl text-sm font-bold text-green-600 hidden sm:block z-10">
+    💸 وفّر 350 جنيه
+  </div>
+  <div class="float-badge-2 absolute top-40 left-6 md:left-16 bg-amber-400 rounded-2xl px-4 py-2 shadow-xl text-sm font-bold text-white hidden sm:block z-10">
+    🎯 كود حصري
+  </div>
+  <div class="float-badge-3 absolute bottom-40 right-8 md:right-24 bg-blue-600 rounded-2xl px-4 py-2 shadow-xl text-sm font-bold text-white hidden sm:block z-10">
+    🏆 أفضل سعر
+  </div>
+
+  <div class="relative z-10 max-w-2xl mx-auto">
+
+    <!-- WhatsApp channel badge -->
+    <div class="inline-flex items-center gap-2 bg-green-500/20 border border-green-400/30 rounded-full px-5 py-2 mb-6 fade-up delay-1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.527 5.855L.057 23.571a.5.5 0 0 0 .612.612l5.716-1.47A11.938 11.938 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.53-5.19-1.44l-.37-.22-3.86.99 1.01-3.74-.24-.39A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      </svg>
+      <span class="text-green-300 text-sm font-bold">قناة واتساب رسمية ✓</span>
+    </div>
+
+    <!-- Main headline -->
+    <h1 class="text-4xl md:text-6xl font-black text-white leading-tight mb-5 fade-up delay-1">
+      خلّي فلوسك تساوي
+      <span class="text-transparent bg-clip-text" style="background-image: linear-gradient(90deg, #25D366, #7CFC00);">
+        أكتر في مصر!
+      </span>
+    </h1>
+
+    <!-- Sub-headline -->
+    <p class="text-lg md:text-xl text-slate-300 mb-3 fade-up delay-2 leading-relaxed">
+      بنتابع أسعار الأجهزة والإلكترونيات لحظة بلحظة على
+    </p>
+
+    <!-- Store pills -->
+    <div class="flex flex-wrap justify-center gap-3 mb-8 fade-up delay-2">
+      <!-- Amazon -->
+      <div class="store-pill">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="#FF9900"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.492.13.102.174.04.338-.187.49-1.096.773-2.374 1.415-3.838 1.928-2.125.77-4.3 1.154-6.523 1.154-2.895 0-5.61-.53-8.143-1.59C1.78 21.24.61 20.54.04 19.92c-.13-.14-.098-.37.005-.48l.002-.002.002-.002zm1.12-1.69c.12.18.348.268.684.263 1.16-.018 2.36-.098 3.6-.24l.453-.06c.18-.028.34-.062.48-.103.174-.05.285-.117.334-.2.05-.085.07-.152.063-.2a.9.9 0 0 0-.05-.142c-.065-.146-.16-.23-.286-.25-.08-.015-.178-.012-.295.01-.4.077-.86.13-1.378.162-.518.033-1.02.052-1.504.058-.487.006-.9-.02-1.24-.08-.34-.057-.59-.18-.755-.365-.166-.185-.245-.45-.237-.797.008-.345.108-.747.3-1.204.39-.952 1.13-1.95 2.22-2.994l.073-.073.098-.1.04-.04.046-.046c.24-.245.362-.413.362-.505 0-.15-.07-.3-.21-.45-.14-.15-.32-.256-.545-.32-.08-.02-.17-.035-.268-.042-.32-.024-.662.042-1.024.198-.36.157-.72.423-1.08.8-.357.375-.67.83-.935 1.363-.264.532-.46 1.116-.59 1.748-.127.633-.148 1.26-.063 1.882.083.62.29 1.14.617 1.56zm12.35-7.63c.18.218.347.418.5.6.154.183.304.37.45.56.15.193.304.406.462.638.16.233.327.508.502.826.173.316.33.655.47 1.016.14.36.25.726.33 1.098.083.37.135.76.155 1.166.022.408.01.84-.038 1.296l-.01.082c-.013.11-.04.193-.083.25-.043.058-.1.086-.175.086-.07 0-.13-.032-.18-.097-.05-.065-.076-.16-.08-.285-.028-.87-.155-1.64-.38-2.31-.226-.67-.55-1.283-.973-1.84-.423-.557-.94-1.063-1.55-1.516-.613-.453-1.3-.862-2.065-1.226-.11-.05-.185-.11-.225-.18-.04-.07-.05-.14-.032-.21.02-.07.07-.13.153-.18.083-.05.2-.083.35-.1a3.15 3.15 0 0 1 .527-.012c.346.02.698.086 1.058.2.36.112.715.27 1.065.47.35.2.693.44 1.026.72.334.28.648.595.94.945z"/></svg>
+        <span class="text-white text-sm font-bold">Amazon</span>
+      </div>
+      <!-- Noon -->
+      <div class="store-pill">
+        <svg class="w-5 h-5" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="15" fill="#FEEE00"/><text x="15" y="20" text-anchor="middle" font-size="12" font-weight="900" fill="#000">noon</text></svg>
+        <span class="text-white text-sm font-bold">Noon</span>
+      </div>
+      <!-- Jumia -->
+      <div class="store-pill">
+        <span class="text-orange-400 font-black text-base">J</span>
+        <span class="text-white text-sm font-bold">Jumia</span>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <a href="https://whatsapp.com/channel/0029VbCpbdSBfxo9kNd8553d" target="_blank" rel="noopener"
+       class="btn-cta inline-flex items-center gap-3 text-white font-black text-xl rounded-2xl px-10 py-5 shadow-2xl mb-6 fade-up delay-3"
+       style="text-decoration:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.527 5.855L.057 23.571a.5.5 0 0 0 .612.612l5.716-1.47A11.938 11.938 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.53-5.19-1.44l-.37-.22-3.86.99 1.01-3.74-.24-.39A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      </svg>
+      انضم للقناة الآن
+    </a>
+
+    <p class="text-slate-400 text-sm fade-up delay-4">🔒 مجاني 100% · بدون إعلانات مزعجة · اشترك وانت آمن</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     SOCIAL PROOF NUMBERS
+══════════════════════════════════════════ -->
+<section class="proof-bg relative py-14 px-5">
+  <div class="proof-bg::before"></div>
+  <div class="relative z-10 max-w-3xl mx-auto">
+    <p class="text-white/80 text-center text-sm font-semibold uppercase tracking-widest mb-8">بالأرقام الحقيقية</p>
+    <div class="grid grid-cols-3 gap-4 text-center text-white">
+      <div>
+        <div class="counter-num">+١٠k</div>
+        <p class="text-white/80 text-sm mt-1">متابع نشيط</p>
+      </div>
+      <div class="border-x border-white/20">
+        <div class="counter-num">+٥٠٠</div>
+        <p class="text-white/80 text-sm mt-1">عرض شهرياً</p>
+      </div>
+      <div>
+        <div class="counter-num">٤٠٪</div>
+        <p class="text-white/80 text-sm mt-1">متوسط الخصم</p>
+      </div>
+    </div>
+    <p class="text-center text-white/90 font-bold text-lg mt-10">
+      انضم لـ +١٠,٠٠٠ مصري ذكي بيوفّروا فلوسهم كل يوم 🇪🇬
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FEATURES
+══════════════════════════════════════════ -->
+<section class="py-16 px-5 bg-white" id="features">
+  <div class="max-w-2xl mx-auto">
+    <p class="text-green-600 text-center text-sm font-bold uppercase tracking-widest mb-2">ليه تنضم؟</p>
+    <h2 class="text-3xl md:text-4xl font-black text-center text-slate-900 mb-10">
+      كل اللي محتاجه عشان توفّر 💡
+    </h2>
+
+    <div class="grid grid-cols-1 gap-5">
+
+      <!-- Card 1 -->
+      <div class="feature-card p-6 flex items-start gap-5">
+        <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-green-50 flex items-center justify-center text-3xl">⚡</div>
+        <div>
+          <h3 class="text-xl font-black text-slate-900 mb-1">تنبيهات لحظية بانخفاض الأسعار</h3>
+          <p class="text-slate-500 leading-relaxed">بمجرد ما السعر ينزل على أي منتج، هتعرف قبل أي حد تاني. مفيش فرصة هتفوتك تاني.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="feature-card p-6 flex items-start gap-5">
+        <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-3xl">🎁</div>
+        <div>
+          <h3 class="text-xl font-black text-slate-900 mb-1">كوبونات وأكواد خصم حصرية</h3>
+          <p class="text-slate-500 leading-relaxed">أكواد خصم ما بتلاقيهاش في أي حتة تانية، بنجيبها لك مباشرة من المواقع والبراندات الكبيرة.</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="feature-card p-6 flex items-start gap-5">
+        <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-blue-50 flex items-center justify-center text-3xl">📊</div>
+        <div>
+          <h3 class="text-xl font-black text-slate-900 mb-1">مقارنة الأسعار بين المواقع</h3>
+          <p class="text-slate-500 leading-relaxed">بنقارنلك نفس المنتج على أمازون ونون وجوميا عشان تشتري من أرخص مكان في ثواني.</p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="feature-card p-6 flex items-start gap-5">
+        <div class="flex-shrink-0 w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center text-3xl">🏠</div>
+        <div>
+          <h3 class="text-xl font-black text-slate-900 mb-1">أجهزة منزلية وإلكترونيات</h3>
+          <p class="text-slate-500 leading-relaxed">تكييفات، غسالات، ثلاجات، موبايلات، لابتوب — كل حاجة بيتها في القناة.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════════ -->
+<section class="py-16 px-5" style="background: var(--bg-soft);" id="how">
+  <div class="max-w-2xl mx-auto">
+    <p class="text-green-600 text-center text-sm font-bold uppercase tracking-widest mb-2">إزاي بيشتغل؟</p>
+    <h2 class="text-3xl font-black text-center text-slate-900 mb-10">٣ خطوات بس 🚀</h2>
+
+    <div class="space-y-5">
+      <div class="flex items-center gap-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
+        <div class="step-num">١</div>
+        <div>
+          <h4 class="font-black text-slate-900">اضغط "انضم للقناة" هنا تحت</h4>
+          <p class="text-slate-500 text-sm">هينقلك مباشرة لقناة الواتساب</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
+        <div class="step-num">٢</div>
+        <div>
+          <h4 class="font-black text-slate-900">اشترك في القناة مجاناً</h4>
+          <p class="text-slate-500 text-sm">بضغطة واحدة وفي ثانية</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-100">
+        <div class="step-num">٣</div>
+        <div>
+          <h4 class="font-black text-slate-900">استنى التنبيهات وابدأ توفّر!</h4>
+          <p class="text-slate-500 text-sm">هتجيلك أفضل الأوفر قبل أي حد</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════ -->
+<section class="py-16 px-5 bg-white">
+  <div class="max-w-2xl mx-auto">
+    <p class="text-green-600 text-center text-sm font-bold uppercase tracking-widest mb-2">بيقولوا إيه؟</p>
+    <h2 class="text-3xl font-black text-center text-slate-900 mb-10">آراء المتابعين الحقيقيين 💬</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+      <div class="rounded-2xl bg-slate-50 border border-slate-100 p-6">
+        <p class="text-yellow-400 text-xl mb-3">★★★★★</p>
+        <p class="text-slate-700 leading-relaxed mb-4">"والله وفّرت ٦٠٠ جنيه على الغسالة اللي كنت عايزاها! القناة دي غيّرت طريقة شرائي."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-green-200 flex items-center justify-center font-black text-green-700">ر</div>
+          <div>
+            <p class="font-bold text-slate-800 text-sm">ريم أحمد</p>
+            <p class="text-slate-400 text-xs">القاهرة</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-50 border border-slate-100 p-6">
+        <p class="text-yellow-400 text-xl mb-3">★★★★★</p>
+        <p class="text-slate-700 leading-relaxed mb-4">"أخدت التليفزيون بتاعي بعرض من القناة بخصم ٣٥٪. الكود الحصري شغال فعلاً!"</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-blue-200 flex items-center justify-center font-black text-blue-700">م</div>
+          <div>
+            <p class="font-bold text-slate-800 text-sm">محمد خالد</p>
+            <p class="text-slate-400 text-xs">الإسكندرية</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-slate-50 border border-slate-100 p-6 md:col-span-2">
+        <p class="text-yellow-400 text-xl mb-3">★★★★★</p>
+        <p class="text-slate-700 leading-relaxed mb-4">"بعت الرابط لكل أصحابي! القناة دي أحسن حاجة عملتها في حياتي. بجد بوفّر مئات الجنيهات كل شهر."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-amber-200 flex items-center justify-center font-black text-amber-700">ن</div>
+          <div>
+            <p class="font-bold text-slate-800 text-sm">نادية سامي</p>
+            <p class="text-slate-400 text-xs">الجيزة</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════
+     FINAL CTA
+══════════════════════════════════════════ -->
+<section class="hero-bg relative py-20 px-5 text-center">
+  <div class="hero-grid"></div>
+  <div class="relative z-10 max-w-xl mx-auto">
+    <div class="text-6xl mb-6">💰</div>
+    <h2 class="text-3xl md:text-4xl font-black text-white mb-4">
+      متفوّتش الأوفر اللي جاي!
+    </h2>
+    <p class="text-slate-300 mb-8 text-lg">كل يوم في عروض جديدة بتتبث. الأذكياء بيشتركوا دلوقتي.</p>
+    <a href="https://whatsapp.com/channel/0029VbCpbdSBfxo9kNd8553d" target="_blank" rel="noopener"
+       class="btn-cta inline-flex items-center gap-3 text-white font-black text-xl rounded-2xl px-10 py-5 shadow-2xl"
+       style="text-decoration:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.527 5.855L.057 23.571a.5.5 0 0 0 .612.612l5.716-1.47A11.938 11.938 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.53-5.19-1.44l-.37-.22-3.86.99 1.01-3.74-.24-.39A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      </svg>
+      انضم للقناة مجاناً
+    </a>
+    <p class="text-slate-400 text-sm mt-5">🔒 رقمك محمي · مش هنبعتلك رسايل تانية · يمكنك إلغاء الاشتراك في أي وقت</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="bg-slate-900 py-8 text-center">
+  <p class="text-slate-500 text-sm">© 2025 أوفر ماركت مصر · جميع الحقوق محفوظة</p>
+  <p class="text-slate-600 text-xs mt-2">الأسعار والعروض تتغير باستمرار. كل عروضنا من المواقع الرسمية.</p>
+</footer>
+
+
+<!-- ══════════════════════════════════════════
+     STICKY MOBILE BAR
+══════════════════════════════════════════ -->
+<div class="sticky-bar" id="stickyBar">
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white flex-shrink-0" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.527 5.855L.057 23.571a.5.5 0 0 0 .612.612l5.716-1.47A11.938 11.938 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.53-5.19-1.44l-.37-.22-3.86.99 1.01-3.74-.24-.39A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+  <a href="https://whatsapp.com/channel/0029VbCpbdSBfxo9kNd8553d" target="_blank" rel="noopener"
+     class="text-white font-black text-lg" style="text-decoration:none;">
+    انضم للقناة الآن — مجاناً!
+  </a>
+</div>
+
+<script>
+  // Show sticky bar after scrolling past hero
+  const stickyBar = document.getElementById('stickyBar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      stickyBar.classList.add('visible');
+    } else {
+      stickyBar.classList.remove('visible');
+    }
+  });
+
+  // Add bottom padding so sticky bar doesn't cover content
+  document.body.style.paddingBottom = '72px';
+</script>
+
+</body>
+</html>
